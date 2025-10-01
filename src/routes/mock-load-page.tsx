@@ -23,20 +23,26 @@ export const MockLoadPage = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchInterview = async () => {
-      if (interviewId) {
-        try {
-          const interviewDoc = await getDoc(doc(db, "interviews", interviewId));
-          if (interviewDoc.exists()) {
-            setInterview({
-              id: interviewDoc.id,
-              ...interviewDoc.data(),
-            } as Interview);
-          }
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setIsLoading(false);
+      if (!interviewId) {
+        navigate("/generate", { replace: true });
+        return;
+      }
+
+      try {
+        const interviewDoc = await getDoc(doc(db, "interviews", interviewId));
+        if (interviewDoc.exists()) {
+          setInterview({
+            id: interviewDoc.id,
+            ...interviewDoc.data(),
+          } as Interview);
+        } else {
+          navigate("/generate", { replace: true });
         }
+      } catch (error) {
+        console.log(error);
+        navigate("/generate", { replace: true });
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -45,14 +51,6 @@ export const MockLoadPage = () => {
 
   if (isLoading) {
     return <LoaderPage className="w-full h-[70vh]" />;
-  }
-
-  if (!interviewId) {
-    navigate("/generate", { replace: true });
-  }
-
-  if (!interview) {
-    navigate("/generate", { replace: true });
   }
 
   return (
