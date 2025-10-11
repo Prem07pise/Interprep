@@ -17,6 +17,7 @@ import { Feedback } from "./routes/feedback";
 import ContactUs from "./routes/contact-us";
 import AboutUs from "./routes/about-us";
 import Services from "./routes/services";
+import { ChatbotPage } from "./routes/chatbot-page";
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
           }
         >
           {/* add all the protect routes */}
+          <Route path="/chatbot" element={<ChatbotPage />} />
           <Route element={<Generate />} path="/generate">
             <Route index element={<Dashboard />} />
             <Route path=":interviewId" element={<CreateEditPage />} />

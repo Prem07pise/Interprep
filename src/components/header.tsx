@@ -23,17 +23,30 @@ const Header = () => {
           <nav className="hidden md:flex items-center gap-3">
             <NavigationRoutes />
             {userId && (
-              <NavLink
-                to={"/generate"}
-                className={({ isActive }) =>
-                  cn(
-                    "text-base text-neutral-600",
-                    isActive && "text-neutral-900 font-semibold"
-                  )
-                }
-              >
-                Take An Interview
-              </NavLink>
+              <>
+                <NavLink
+                  to={"/generate"}
+                  className={({ isActive }) =>
+                    cn(
+                      "text-base text-neutral-600",
+                      isActive && "text-neutral-900 font-semibold"
+                    )
+                  }
+                >
+                  Take An Interview
+                </NavLink>
+                <NavLink
+                  to={"/chatbot"}
+                  className={({ isActive }) =>
+                    cn(
+                      "text-base text-neutral-600",
+                      isActive && "text-neutral-900 font-semibold"
+                    )
+                  }
+                >
+                  Chatbot
+                </NavLink>
+              </>
             )}
           </nav>
 
